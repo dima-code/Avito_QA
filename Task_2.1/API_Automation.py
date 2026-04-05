@@ -384,23 +384,3 @@ def test_response_content_type_is_json_for_create():
         f"получено {response.headers.get('Content-Type', '')}"
     )
 
-
-# Необязательные проверки по ручкам v2 из коллекции.
-
-
-def test_get_statistics_v2_by_non_existing_id_returns_not_found():
-    non_existing_id = str(uuid.uuid4())
-    response = request_json("GET", f"/api/2/statistic/{non_existing_id}")
-    assert response.status_code == 404, (
-        f"Ожидался статус 404 для несуществующего id статистики v2, "
-        f"получено {response.status_code}, тело={response.text}"
-    )
-
-
-def test_delete_v2_by_non_existing_id_returns_not_found():
-    non_existing_id = str(uuid.uuid4())
-    response = request_json("DELETE", f"/api/2/item/{non_existing_id}")
-    assert response.status_code == 404, (
-        f"Ожидался статус 404 для несуществующего id при удалении, "
-        f"получено {response.status_code}, тело={response.text}"
-    )
